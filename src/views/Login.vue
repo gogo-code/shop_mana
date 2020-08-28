@@ -33,6 +33,8 @@
 <script>
 export default {
   data() {
+    
+
     return {
       // 登录表单数据绑定对象
       loginForm: {
@@ -54,6 +56,7 @@ export default {
             trigger: "blur",
           },
         ],
+        
       },
     };
   },
