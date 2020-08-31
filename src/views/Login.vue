@@ -14,11 +14,18 @@
       >
         <!-- 用户名 -->
         <el-form-item prop="username">
-          <el-input v-model="loginForm.username" prefix-icon="el-icon-user-solid"></el-input>
+          <el-input
+            v-model="loginForm.username"
+            prefix-icon="el-icon-user-solid"
+          ></el-input>
         </el-form-item>
         <!-- 密码 -->
         <el-form-item prop="password">
-          <el-input v-model="loginForm.password" prefix-icon="el-icon-s-goods" type="password"></el-input>
+          <el-input
+            v-model="loginForm.password"
+            prefix-icon="el-icon-s-goods"
+            type="password"
+          ></el-input>
         </el-form-item>
         <!-- 按钮 -->
         <el-form-item class="btns">
@@ -33,55 +40,51 @@
 <script>
 export default {
   data() {
-    
-
     return {
       // 登录表单数据绑定对象
       loginForm: {
-        username: "admin",
-        password: "123456",
+        username: 'admin',
+        password: '123456',
       },
       // 表单验证规则对象
       loginFormRules: {
         username: [
-          { required: true, message: "请输入登录名称", trigger: "blur" },
-          { min: 3, max: 10, message: "长度在3到10个字符", trigger: "blur" },
+          { required: true, message: '请输入登录名称', trigger: 'blur' },
+          { min: 3, max: 10, message: '长度在3到10个字符', trigger: 'blur' },
         ],
         password: [
-          { required: true, message: "请输入登录密码", trigger: "blur" },
+          { required: true, message: '请输入登录密码', trigger: 'blur' },
           {
             min: 6,
             max: 15,
-            message: "长度在 6 到 15 个字符",
-            trigger: "blur",
+            message: '长度在 6 到 15 个字符',
+            trigger: 'blur',
           },
         ],
-        
       },
-    };
+    }
   },
   methods: {
     resetLoginForm() {
-      this.$refs.loginFormRef.resetFields();
+      this.$refs.loginFormRef.resetFields()
     },
     login() {
-      this.$refs.loginFormRef.validate(async valid => {
+      this.$refs.loginFormRef.validate(async (valid) => {
         // 表单预验证
-        if (!valid) return;
+        if (!valid) return
         //解构赋值，await将promise对象转化为数据对象,asyn表示异步操作
-        const { data: res } = await this.$http.post("login", this.loginForm); 
-        
-        if(res.meta.status!==200)
-        return this.$message.error('登录失败')
+        const { data: res } = await this.$http.post('login', this.loginForm)
+
+        if (res.meta.status !== 200) return this.$message.error('登录失败')
         this.$message.success('登录成功')
         // 登录成功后由于后续api接口需要一些权限，所以需要身份验证token，token只在当前网站打开期间生效，所以保存到客户端的sessionStorage中
-        window.sessionStorage.setItem("token",res.data.token)
+        window.sessionStorage.setItem('token', res.data.token)
         // 通过编程式导航跳转到后台主页，路由地址为/home
-        this.$router.push("/home")
-      });
+        this.$router.push('/home')
+      })
     },
   },
-};
+}
 </script>
 
 <style lang="less" scoped>

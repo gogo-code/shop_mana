@@ -1,20 +1,15 @@
 <template>
-<div>
-  <h2>Welcome</h2>
-</div>
+  <div>
+    <h2>Welcome</h2>
+  </div>
 </template>
 
 <script>
 export default {
-  data(){
-    return {
-
-    }
+  data() {
+    return {}
   },
-
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
